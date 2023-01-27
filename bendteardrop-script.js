@@ -84,7 +84,7 @@ $(document).ready(function() {
 				sum += productTotal;
 				
 			} else {
-				$(this).closest('.product2_item').find('.price').text(originalPrice);
+				$(this).closest('.product2_item').find('.price').text(originalPrice.toLocaleString());
 			}
 		});
 		sum += trailerPrice;
@@ -109,17 +109,6 @@ $(document).ready(function() {
 			sidebarAppend.remove();
 			$(".slider-details .form-product-addons-list, .sidebar-nav-item.selected .product-addons-list")
 				.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>'); 
-			
-			var currentVal = $('#addons').val();
-			var addons = [];
-			$('input[type="checkbox"]:checked').each(function() {
-				addons.push(qtyProductPrice);
-			});
-			if (addons.length > 0) {
-				$('#addons').val(addons.join(', '));
-			} else {
-				$('#addons').val('');
-			}
 		}else{
 			formAppend.remove();
 			sidebarAppend.remove();
