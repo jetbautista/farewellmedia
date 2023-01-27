@@ -54,9 +54,6 @@ $(document).ready(function() {
 	//If product is selected
 	$('.input-check').on('click', function() {
 		var $this = $(this);
-		var name = $this.attr('name');
-		var currentVal = $('#addons').val();
-		
 		$this.closest('.product2_item').find('.quantity-wrap').toggleClass('show');
 		if ($this.is(':checked')) {
 			$('.heading-product-addons').show();
@@ -100,7 +97,8 @@ $(document).ready(function() {
 		var productName =  $(this).closest('.product2_item').find('.input-check').attr('name');	
 		var quantity = $(this).closest('.product2_item').find('.quantity-field').val();
 		productTotal =   $(this).closest('.product2_item').find('.price').text();		
-		var qtyProductPrice =  quantity+'x '+ productName+': '+productTotal;		
+		var qtyProductPrice = quantity + 'x ' + productName + ': ' + productTotal;		
+
 		//Append in the sidebar and form
 		$(".slider-details .form-product-addons-list, .sidebar-nav-item.selected .product-addons-list")
 			.append('<div class="addon-item" data-name="'+productName+'"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">'+qtyProductPrice+'</div>');    
@@ -110,8 +108,18 @@ $(document).ready(function() {
 			formAppend.remove();
 			sidebarAppend.remove();
 			$(".slider-details .form-product-addons-list, .sidebar-nav-item.selected .product-addons-list")
-			.append('<div class="addon-item" data-name="'+productName+'"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">'+qtyProductPrice+'</div>'); 
+				.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>'); 
 			
+			var currentVal = $('#addons').val();
+			var addons = [];
+			$('input[type="checkbox"]:checked').each(function() {
+				addons.push(qtyProductPrice);
+			});
+			if (addons.length > 0) {
+				$('#addons').val(addons.join(', '));
+			} else {
+				$('#addons').val('');
+			}
 		}else{
 			formAppend.remove();
 			sidebarAppend.remove();
