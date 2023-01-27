@@ -122,8 +122,7 @@ $(document).ready(function() {
 				.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>');
 		} else {
 			formAppend.remove();
-			sidebarAppend.remove();
-			console.log('remove');
+			sidebarAppend.remove();			
 		}
 	});
 
@@ -145,8 +144,7 @@ $(document).ready(function() {
 
 		} else {
 			formAppend.remove();
-			sidebarAppend.remove();
-			console.log('remove');
+			sidebarAppend.remove();			
 		}
 	});
 
