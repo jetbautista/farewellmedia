@@ -12,9 +12,9 @@ $(document).ready(function() {
 		});
 		$('.sidebar-nav-list .sidebar-nav-item').each(function() {
 			var itemIndex = $(this).index();
-			if (slideIndex > itemIndex){ 
+			if (slideIndex > itemIndex) {
 				$(this).addClass('checked');
-			}else{
+			} else {
 				$(this).removeClass('checked');
 			}
 		});
@@ -35,7 +35,7 @@ $(document).ready(function() {
 			$(this).children().eq(slideIndex).prev().click();
 		});
 	});
- 
+
 	/*End Sidebar Functions*/
 
 	/*Main Product Functions*/
@@ -67,7 +67,7 @@ $(document).ready(function() {
 			$this.closest('.product2_item').find('.quantity-field').val(0);
 		}
 	});
-	
+
 
 	//Total Est. Price
 	$('.input-check, .quantity-field').change(function() {
@@ -77,51 +77,53 @@ $(document).ready(function() {
 		var addons = [];
 		$('.input-check').each(function() {
 			productPrice = parseFloat($(this).val());
-			originalPrice = $(this).closest('.product2_item').find('.input-check').val();			
+			originalPrice = $(this).closest('.product2_item').find('.input-check').val();
 			quantity = $(this).closest('.product2_item').find('.quantity-field').val();
-			productName =  $(this).closest('.product2_item').find('.input-check').attr('name');	
-			
+			productName = $(this).closest('.product2_item').find('.input-check').attr('name');
+
 			if ($(this).is(':checked')) {
 				productTotal = productPrice * quantity;
 				$(this).closest('.product2_item').find('.price').text(productTotal.toLocaleString());
 				sum += productTotal;
-	
-				qtyProductPrice = quantity + 'x ' + productName + ': ' + productTotal;	
-				 //Add in the form textarea
-				
+
+				//Add in the form textarea
+				qtyProductPrice = quantity + 'x ' + productName + ': ' + productTotal;
 				addons.push(qtyProductPrice);
 				if (addons.length > 0) {
-				$('#addons').val(addons.join(', '));
+					$('#addons').val(addons.join(', '));
 				} else {
-				$('#addons').val('');
+					$('#addons').val('');
 				}
-				
+
 			} else {
 				$(this).closest('.product2_item').find('.price').text(originalPrice.toLocaleString());
 			}
 		});
 		sum += trailerPrice;
-		$('#total, .price.total').text( sum.toLocaleString() );
-		$('#form-total').val( sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );			
+		$('#total, .price.total').text(sum.toLocaleString());
+		$('#form-total').val(sum.toLocaleString('en-US', {
+			style: 'currency',
+			currency: 'USD'
+		}));
 	});
 
 	$('.input-check').on('click', function() {
-		var productName =  $(this).closest('.product2_item').find('.input-check').attr('name');	
+		var productName = $(this).closest('.product2_item').find('.input-check').attr('name');
 		var quantity = $(this).closest('.product2_item').find('.quantity-field').val();
-		productTotal =   $(this).closest('.product2_item').find('.price').text();		
-		var qtyProductPrice = quantity + 'x ' + productName + ': ' + productTotal;		
+		productTotal = $(this).closest('.product2_item').find('.price').text();
+		var qtyProductPrice = quantity + 'x ' + productName + ': ' + productTotal;
 
 		//Append in the sidebar and form
 		$(".slider-details .form-product-addons-list, .sidebar-nav-item.selected .product-addons-list")
-			.append('<div class="addon-item" data-name="'+productName+'"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">'+qtyProductPrice+'</div>');    
+			.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>');
 		formAppend = $('.slider-details .form-product-addons-list .addon-item[data-name="' + productName + '"]');
 		sidebarAppend = $('.sidebar-nav-item .addon-item[data-name="' + productName + '"]');
-		if ( $(this).is(':checked')) {
+		if ($(this).is(':checked')) {
 			formAppend.remove();
 			sidebarAppend.remove();
 			$(".slider-details .form-product-addons-list, .sidebar-nav-item.selected .product-addons-list")
-				.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>'); 
-		}else{
+				.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>');
+		} else {
 			formAppend.remove();
 			sidebarAppend.remove();
 			console.log('remove');
@@ -129,22 +131,22 @@ $(document).ready(function() {
 	});
 
 	$('.quantity-field').on('change', function() {
-		var productName =  $(this).closest('.product2_item').find('.input-check').attr('name');	
+		var productName = $(this).closest('.product2_item').find('.input-check').attr('name');
 		var quantity = $(this).closest('.product2_item').find('.quantity-field').val();
-		productTotal =   $(this).closest('.product2_item').find('.price').text();		
-		var qtyProductPrice =  quantity+'x '+ productName+': '+productTotal;		
+		productTotal = $(this).closest('.product2_item').find('.price').text();
+		var qtyProductPrice = quantity + 'x ' + productName + ': ' + productTotal;
 		//Append in the sidebar and form
 		$(".slider-details .form-product-addons-list, .sidebar-nav-item.selected .product-addons-list")
-			.append('<div class="addon-item" data-name="'+productName+'"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">'+qtyProductPrice+'</div>');    
+			.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>');
 		formAppend = $('.slider-details .form-product-addons-list .addon-item[data-name="' + productName + '"]');
 		sidebarAppend = $('.sidebar-nav-item .addon-item[data-name="' + productName + '"]');
-		if ($(this).closest('.product2_item').find('.quantity-field:checked') ) {
+		if ($(this).closest('.product2_item').find('.quantity-field:checked')) {
 			formAppend.remove();
 			sidebarAppend.remove();
 			$(".slider-details .form-product-addons-list, .sidebar-nav-item.selected .product-addons-list")
-			.append('<div class="addon-item" data-name="'+productName+'"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">'+qtyProductPrice+'</div>'); 
-			
-		}else{
+				.append('<div class="addon-item" data-name="' + productName + '"><a href="#" class="addon-item-remove w-inline-block"></a><div class="addon-item-name">' + qtyProductPrice + '</div>');
+
+		} else {
 			formAppend.remove();
 			sidebarAppend.remove();
 			console.log('remove');
@@ -176,14 +178,14 @@ $(document).ready(function() {
 		$('#size').text(product.size);
 		$('#weight').text(product.weight);
 
-	}else{
+	} else {
 		window.location.replace("/customize-trailer");
 	}
 
 	$('.input-hidden').prop('readonly', true).prop('hidden', true);
 	$('.customization-main-wrapper').on('click', '.next-button-wrap, .sidebar-nav-wrap, .bottom-slide-nav, .mobile-nav-slide-item', function() {
 		if ($('.main-nav .w-slider-dot:last-child').hasClass('w-active')) {
-			$('.next-text').text('Submit');	
+			$('.next-text').text('Submit');
 			$('.next-button-wrap').addClass('form-submit');
 		} else {
 			$('.next-text').text('Next');
@@ -206,7 +208,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-		
+
 	//When form is submitted
 	$('.customization-main-wrapper').on('click', '.form-submit', function() {
 		$('input[type="submit"]').click();
@@ -219,7 +221,7 @@ $(document).ready(function() {
 
 			$('.form-submit').removeClass('disabled');
 			$('#hidden-submit').prop('disabled', false);
-			
+
 			$('input[type="submit"]').on('click', function() {
 				$('input[type="checkbox"]').remove(); //Remove empty fields
 			});
@@ -231,7 +233,7 @@ $(document).ready(function() {
 	/*Customization form Functions*/
 	/** Mobile Nav Slider **/
 	if ($(window).width() <= 479) {
-		
+
 		//Change hero banner image on Mobile nav & next
 		$('.mobile-nav-mask .w-slide[aria-hidden="true"]').addClass('not-active');
 		$('.customization-main-wrapper').on('click', '.next-button-wrap, .bottom-slide-nav, .mobile-nav-slide-item', function() {
@@ -253,7 +255,7 @@ $(document).ready(function() {
 				}
 			});
 		});
-		
+
 		//If mobile nav slide item is click
 		$('.mobile-nav-slide-item').on('click', function() {
 			var slideIndex = $(this).index();
@@ -292,7 +294,7 @@ $(document).ready(function() {
 
 			//Add bottom padding to the product listing
 			$('.customization-main-content').css('padding-bottom', sectionSlideWrap + 'px');
-			
+
 			// Iterate over all the sections in the container
 			$('.w-slide.active .product2_item').each(function() {
 				// Get the position and height of the current product
@@ -304,7 +306,7 @@ $(document).ready(function() {
 				let itemPosition = sectionPos + sectionProduct;
 
 				if (newStartingPosition > itemPosition) {
-					
+
 					var title = $(this).find('.grid-product-title').text();
 					var image = $(this).find('img').attr('src');
 
