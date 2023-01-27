@@ -35,7 +35,7 @@ $(document).ready(function() {
 			$(this).children().eq(slideIndex).prev().click();
 		});
 	});
-
+ 
 	/*End Sidebar Functions*/
 
 	/*Main Product Functions*/
