@@ -12,7 +12,7 @@ $(document).ready(function() {
 		});
 		$('.sidebar-nav-list .sidebar-nav-item').each(function() {
 			var itemIndex = $(this).index();
-			if (slideIndex > itemIndex){
+			if (slideIndex > itemIndex){ 
 				$(this).addClass('checked');
 			}else{
 				$(this).removeClass('checked');
