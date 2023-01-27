@@ -74,14 +74,27 @@ $(document).ready(function() {
 		var sum = 0;
 		var trailerTextFormat = $('#product-price').text().replace(/,/g, '');
 		var trailerPrice = parseFloat(trailerTextFormat);
+		var addons = [];
 		$('.input-check').each(function() {
 			productPrice = parseFloat($(this).val());
 			originalPrice = $(this).closest('.product2_item').find('.input-check').val();			
 			quantity = $(this).closest('.product2_item').find('.quantity-field').val();
+			productName =  $(this).closest('.product2_item').find('.input-check').attr('name');	
+			
 			if ($(this).is(':checked')) {
 				productTotal = productPrice * quantity;
 				$(this).closest('.product2_item').find('.price').text(productTotal.toLocaleString());
 				sum += productTotal;
+	
+				qtyProductPrice = quantity + 'x ' + productName + ': ' + productTotal;	
+				 //Add in the form textarea
+				
+				addons.push(qtyProductPrice);
+				if (addons.length > 0) {
+				$('#addons').val(addons.join(', '));
+				} else {
+				$('#addons').val('');
+				}
 				
 			} else {
 				$(this).closest('.product2_item').find('.price').text(originalPrice.toLocaleString());
@@ -89,8 +102,7 @@ $(document).ready(function() {
 		});
 		sum += trailerPrice;
 		$('#total, .price.total').text( sum.toLocaleString() );
-		$('#form-total').val( sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );	
-		
+		$('#form-total').val( sum.toLocaleString('en-US', { style: 'currency', currency: 'USD' }) );			
 	});
 
 	$('.input-check').on('click', function() {
