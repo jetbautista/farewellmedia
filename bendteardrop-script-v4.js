@@ -95,7 +95,7 @@ $(document).ready(function() {
 				//Add in the form textarea
                 qtyProductPrice = quantity+'x '+productName + windowOption +': '+'$'+productTotal;
 				addons.push(qtyProductPrice);
-                console.log(qtyProductPrice);
+                //console.log(qtyProductPrice);
 				if (addons.length > 0) {
 					$('#addons').val(addons.join(', '));
 				} else {
