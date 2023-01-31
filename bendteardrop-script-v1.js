@@ -186,6 +186,10 @@ $(document).ready(function() {
 
 	$('.input-hidden').prop('readonly', true).prop('hidden', true);
 	$('.customization-main-wrapper').on('click', '.next-button-wrap, .sidebar-nav-wrap, .bottom-slide-nav, .mobile-nav-slide-item', function() {
+		$('.customization-main-wrapper').on('click', '.next-button-wrap, .sidebar-nav-wrap, .bottom-slide-nav, .mobile-nav-slide-item', function() {
+			var slideHeight = $('.custom-slide:not([aria-hidden="true"])').height();
+			$('.slider-mask').height(slideHeight);
+		});
 		if ($('.main-nav .w-slider-dot:last-child').hasClass('w-active')) {
 			$('.next-text').text('Submit');
 			$('.next-button-wrap').addClass('form-submit');
